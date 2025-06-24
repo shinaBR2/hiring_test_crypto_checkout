@@ -8,6 +8,7 @@ import { DataProvider } from "./contexts/DataProvider.js";
 import { AuthProvider } from "./contexts/AuthProvider.js";
 import { UserProvider } from "./contexts/UserDataProvider.js";
 import { AddressProvider } from "./contexts/AddressProvider.js";
+import { WalletProvider } from "./contexts/WalletProvider.js";
 
 // Call make Server
 makeServer();
@@ -19,7 +20,9 @@ ReactDOM.render(
         <DataProvider>
           <UserProvider>
             <AddressProvider>
-              <App />
+              <WalletProvider>
+                <App />
+              </WalletProvider>
             </AddressProvider>
           </UserProvider>
         </DataProvider>

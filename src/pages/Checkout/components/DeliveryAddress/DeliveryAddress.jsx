@@ -2,13 +2,16 @@ import "./DeliveryAddress.css";
 import { useUserData } from "../../../../contexts/UserDataProvider.js";
 import { v4 as uuid } from "uuid";
 
-import React from "react";
+import React, {useState} from "react";
 import { toast } from "react-hot-toast";
 import { useAuth } from "../../../../contexts/AuthProvider.js";
 import { useNavigate } from "react-router-dom";
 
+import { CryptoPaymentModal } from "../CryptoPaymentModal/CryptoPaymentModal";
+
 export const DeliveryAddress = () => {
   const { userDataState, dispatch, clearCartHandler } = useUserData();
+  const [isCryptoModalOpen, setIsCryptoModalOpen] = useState(false);
 
   const {
     cartProducts,
@@ -70,6 +73,15 @@ export const DeliveryAddress = () => {
     }
   };
 
+  const payCryptoHandler = () => {
+    if (orderAddress) {
+      setIsCryptoModalOpen(true);
+    } else {
+      toast("Please select an address!");
+    }
+  };
+
+
   return (
     <div className="delivery-address-container">
       <p>Delivering To</p>
@@ -84,10 +96,23 @@ export const DeliveryAddress = () => {
           {orderAddress?.pincode}
         </span>
         <span className="contact">Contact: {orderAddress?.phone}</span>
-        <button onClick={placeOrderHandler} className="place-order-btn">
-          Place Order
-        </button>
+
+        <div className="payment-buttons-container">
+          <button onClick={payCryptoHandler} className="pay-crypto-btn">
+            Pay with Crypto
+          </button>
+          <button onClick={placeOrderHandler} className="place-order-btn">
+            Place Order
+          </button>
+        </div>
       </div>
+
+      {isCryptoModalOpen && <CryptoPaymentModal
+        isOpen={isCryptoModalOpen}
+        onClose={() => setIsCryptoModalOpen(false)}
+        totalAmount={totalAmount}
+        orderAddress={orderAddress}
+      />}
     </div>
   );
 };

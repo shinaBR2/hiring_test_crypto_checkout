@@ -23,6 +23,12 @@
   font-weight: bolder;
 }
 
+.payment-buttons-container {
+  display: flex;
+  gap: 10px;
+  margin-top: 50px;
+}
+
 .place-order-btn {
   border: none;
   color: white;
@@ -31,10 +37,26 @@
   border-radius: 10px;
   font-weight: 600;
   font-size: 1.1rem;
-  margin-top: 50px;
+  width: 50%;
 }
 
 .place-order-btn:hover {
   cursor: pointer;
   background-color: black;
+}
+
+.pay-crypto-btn {
+  border: none;
+  color: white;
+  background-color: #f7931a;
+  padding: 12px 36px;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 1.1rem;
+  width: 50%;
+}
+
+.pay-crypto-btn:hover {
+  cursor: pointer;
+  background-color: #d4820a;
 }
